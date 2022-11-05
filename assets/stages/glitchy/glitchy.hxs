@@ -6,6 +6,7 @@ var stageCurtains;
 
 var legacyCutscene:FNFSprite;
 
+// finally i will hear the glitchy red voice
 function onCreate() {
 	PlayState.defaultCamZoom = 0.7;
 	stage.curStage = 'glitchy';
@@ -83,7 +84,7 @@ function onEvent(event) {
 			PlayState.defaultCamZoom = 1.25;
 			PlayState.camGame.zoom = 1.25;
 			PlayState.camGame.alpha = 0.001;
-			PlayState.camHUD.visible = false;
+			PlayState.camHUD.alpha  = 0.001;
 			new FlxTimer().start(1.0, function(tmr:FlxTimer)
 				{
 					FlxTween.tween(PlayState.strumHUD[1], {alpha: 0.0}, 3.0, {ease: FlxEase.quadInOut});
@@ -94,18 +95,21 @@ function onEvent(event) {
 					FlxTween.tween(PlayState.camGame, {alpha: 0.5}, 1.6, {ease: FlxEase.quadInOut});
 					legacyCutscene.x += 150;
 					FlxTween.tween(legacyCutscene, {x: legacyCutscene.x - 150, alpha: 1.0}, 9.0, {ease: FlxEase.quadInOut});
+					// eles pegaru tudu di mim
+					// mimha VOIS, mimha LIBERDADI, meu LEGADU
+					// e eles mi subistituiru pra um mlk dos cabelo azul gostoso do krai
 				});
 
-			PlayState.boyfriend.visible = false;
-			PlayState.dadOpponent.visible = false;
-			girlTits.visible = false;
-			legacyCutscene.visible = true;
-			legacyCutscene.animation.play('speech');
+			PlayState.boyfriend.alpha = 0.001;
+			PlayState.dadOpponent.alpha = 0.001;
+			girlTits.alpha = 0.001;
+			legacyCutscene.alpha = true;
+			legacyCutscene.animastion.play('speech');
 			legacyCutscene.animation.finishCallback = function(name:String) 
 			{
-				legacyCutscene.visible = false;
-				PlayState.camGame.visible = false;
-				PlayState.camHUD.visible = false;
+				legacyCutscene.kill();
+				PlayState.camGame.alpha = 0.001; // nao da pra ver mas ele ta visível 
+				PlayState.camHUD.visible = 0.001;
 				PlayState.defaultCamZoom = 0.7;
 				PlayState.camGame.zoom = 0.7;
 
@@ -113,14 +117,13 @@ function onEvent(event) {
 					{
 						PlayState.camGame.zoom = 0.9;
 						PlayState.camGame.alpha = 1.0;
-						PlayState.camGame.visible = true;
-						PlayState.camHUD.visible = true;
-						PlayState.boyfriend.visible = true;
-						PlayState.dadOpponent.visible = true;
-						girlTits.visible = false;
+						PlayState.camHUD.alpha = 1;
+						PlayState.boyfriend.alpha = 1;
+						PlayState.dadOpponent.alpha = 1;
+						girlTits.kill();
 
 						PlayState.strumHUD[1].alpha = 1.0;
 					});
-			}
+			}; // esqueçeru do ponto e virgula :(
 	}
 }
